@@ -4,9 +4,11 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "dump-types": "supabase gen types typescript --linked --schema public > lib/database.types.ts "
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.4.0",
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
