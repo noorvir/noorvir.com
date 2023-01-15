@@ -5,4 +5,5 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   db: { schema: "public" },
 })
 
+
 export default supabase;

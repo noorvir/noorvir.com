@@ -1,10 +1,9 @@
 import { SessionContextProvider, useSession } from '@supabase/auth-helpers-react';
 import type { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import supabase from 'lib/supabase';
-
-import '../styles/globals.css';
 
 async function signInWithGitHub() {
   const { data, error } = await supabase.auth.signInWithOAuth({
@@ -29,8 +28,14 @@ function Auth() {
 }
 
 function Wrapped({ Component, pageProps }: AppProps) {
+  const router = useRouter();
   const session = useSession();
-  return <>{!session ? <Auth /> : <Component {...pageProps} />}</>;
+
+  if (router.pathname.startsWith('/dashboard') && !session) {
+    return <Auth />;
+  }
+
+  return <Component {...pageProps} />;
 }
 
 function App({ Component, pageProps }: AppProps) {
